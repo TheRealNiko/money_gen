@@ -1,0 +1,204 @@
+<center><button id="money-btn">Click for Money</button></center>
+<center><div class="fire"></div></center>
+<center><div class="gif-container">
+  <button id="money-btn">Fall Down!</button>
+<img src="Cannabis_leaf.svg.png" alt="Animated Image" class="falling-image">
+  <img src="https://media.tenor.com/FLdzCl5HsUUAAAAC/daj-kurwie-miodu-daj-kurwie-miodu-daj.gif" alt="Animated GIF">
+</div></center>
+<style>
+  .animate-fall {
+  animation-name: fall;
+  animation-duration: 3s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+  .falling-image {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-name: fall;
+  animation-duration: 3s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fall {
+  from {
+    top: -200px;
+  }
+  to {
+    top: calc(100vh - 200px);
+  }
+}
+  .gif-container {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+}
+
+.gif-container img {
+  display: block;
+  width: 300px;
+  height: auto;
+}
+  body {
+ background-image: url("weed-in-color-wallpaper-preview.jpg");
+ position: fixed;
+ position: flex;
+ width: auto;
+}
+   #money-btn {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.money-container {
+  pointer-events: none;
+  position: absolute;
+  top: -50px;
+  width: 20px;
+  height: 20px;
+  background-color: greenyellow;
+  border-radius: 50%;
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+  animation: rain 1s ease-out forwards;
+  z-index: 1;
+}
+
+.money {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-image: url("pngimg.com - money_PNG3528.png");
+  background-size: contain;
+  animation: money-fall 10s ease-out forwards;
+  display: flex; /* Add a display property */
+  flex-wrap: wrap; /* Add a flex-wrap property */
+  align-items: flex-start; /* Add an align-items property */
+  left: 50%; /* Set the left property to 50% */
+  transform: translateX(-50%); /* Subtract half of the width from the left property */
+}
+.fire {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: url('https://thumbs.gfycat.com/AbandonedAnguishedCatfish-size_restricted.gif') no-repeat center center/contain;
+}
+
+@keyframes rain {
+  from {
+    transform: translateY(50px) translateX(0);
+  }
+  to {
+    transform: translateY(100vh) translateX(50px);
+  }
+}
+</style>
+<style>
+   #money-btn {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.money-container {
+  pointer-events: none;
+  position: absolute;
+  top: -30px;
+  width: 20px;
+  height: 20px;
+  background-color: greenyellow;
+  border-radius: 50%;
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+  animation: rain 1s ease-out forwards;
+  z-index: 1;
+}
+
+.money {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-image: url("pngimg.com - money_PNG3528.png");
+  background-size: contain;
+  animation: money-fall 10s ease-out forwards;
+  display: flex; /* Add a display property */
+  flex-wrap: wrap; /* Add a flex-wrap property */
+  align-items: flex-start; /* Add an align-items property */
+  left: 50%; /* Set the left property to 50% */
+  transform: translateX(-50%); /* Subtract half of the width from the left property */
+}
+
+@keyframes rain {
+  from {
+    transform: translateY(50px) translateX(0);
+  }
+  to {
+    transform: translateY(100vh) translateX(50px);
+  }
+}
+</style>
+
+<script>
+const moneyBtn = document.getElementById("money-btn");
+const body = document.body;
+const moneyContainer = document.createElement("div");
+moneyContainer.classList.add("money-container");
+body.appendChild(moneyContainer);
+
+// Create 50 money elements
+for (let i = 0; i < 50; i++) {
+  const money = document.createElement("div");
+  money.classList.add("money");
+  money.style.animationDelay = `${Math.random()}s`;
+  moneyContainer.appendChild(money);
+}
+
+moneyBtn.addEventListener("click", function() {
+  requestAnimationFrame(() => {
+    // Remove the old money container
+    moneyContainer.remove();
+
+    // Create a new money container
+    const newMoneyContainer = moneyContainer.cloneNode(true);
+
+    // Modify the CSS animation properties of the money elements
+    const moneyElements = newMoneyContainer.querySelectorAll(".money");
+    moneyElements.forEach((money, index) => {
+      money.style.animationDelay = `${index * 0.03}s`;
+      money.style.animationDuration = `${1 + Math.random()}s`;
+      money.style.left = `${index * 30}px`;
+      money.style.bottom = `${index * 20}px`; /* Add a bottom property to stack up the money */
+      money.style.transform = `translateY(-50%) translateX(${Math.floor(Math.random() * 100)}%) rotate(${Math.floor(Math.random() * 360)}deg)`; /* Modify the transform property */
+    });
+
+    body.appendChild(newMoneyContainer);
+  });
+});
+const fallBtn = document.getElementById("fall-btn");
+const fallingImage = document.querySelector(".falling-image");
+
+fallBtn.addEventListener("click", function() {
+  fallingImage.classList.add("animate-fall");
+});
+
+
+
+</script>
